@@ -1,0 +1,8 @@
+Terminal:
+npm install jest
+SAU
+npm install -g jest
+SAU/SI
+npx jest
+
+jest Calculator.test.js // Numele clasei de test trebuie sa fie ceva clasa.test.js
