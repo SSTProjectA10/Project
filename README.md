@@ -1,9 +1,14 @@
-# Project
+# Project - Calculator
+
+Faza inițială:
+- Funcții pentru operații de bază (adunare, scădere, înmulțire, împărțire)
+- Frontend ceva interfață, butoane, ceva ce putem testa
+- Node setup?
+- Teste unitare cu pariționări și categorii (cursul 1)
+- Funcții suplimentare să fie de bine (palindorom, cls a 9-a, etcx)
 
 Deci, ceea ce avem de făcut este:
-- Să facem o aplicație web de bază cu:
-  - O bază de date (Mongo)
-  - Câteva funții cu efect în frontend să le testăm
+- Să facem o aplicație web de bază
 - Să facem teste pentru această aplicație având în vedere:
   - Testarea unitarea
   - Testarea integrată
