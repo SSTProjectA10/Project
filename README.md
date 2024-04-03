@@ -1,8 +1,8 @@
 # Project - Calculator
 
 Faza inițială:
-- Funcții pentru operații de bază (adunare, scădere, înmulțire, împărțire)
-- Frontend ceva interfață, butoane, ceva ce putem testa
+- ~~Funcții pentru operații de bază (adunare, scădere, înmulțire, împărțire)~~
+- ~~Frontend ceva interfață, butoane, ceva ce putem testa~~
 - Node setup?
 - Teste unitare cu pariționări și categorii (cursul 1)
 - Funcții suplimentare să fie de bine (palindorom, cls a 9-a, etcx)
