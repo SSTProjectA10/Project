@@ -4,10 +4,38 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import PaginaMeniu from './components/PaginaMeniu/PaginaMeniu';
+import PaginaElevi from './components/PaginaElevi/PaginaElevi';
+import PaginaProfesori from './components/PaginaProfesori/PaginaProfesori';
+import PaginaMateriiScolare from './components/PaginaMateriiScolare/PaginaMateriiScolare';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <PaginaMeniu />,
+  },
+  {
+    path: "/paginaelevi",
+    element: <PaginaElevi />,
+  },
+  {
+    path: "/paginaprofesori",
+    element: <PaginaProfesori />,
+  },
+  {
+    path: "/paginamateriiscolare",
+    element: <PaginaMateriiScolare />,
+  },
+]);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
