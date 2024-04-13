@@ -10,8 +10,8 @@
   - [ ] Mutanți?
     
 ## Faza doi:
-- [ ] Modificăm aplicația să aibă un singur tabel/entitate
-- [ ] Legăm o bază de date mongo la aplicație
+- [x] Modificăm aplicația să aibă un singur tabel/entitate
+- [x] Legăm o bază de date mongo la aplicație
 - [ ] Teste CRUD pentru aplicație
 
 ## ~~Faza inițială:~~
