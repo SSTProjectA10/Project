@@ -30,7 +30,7 @@ function PaginaMeniu() {
         >
           Elevi
         </Button>
-        <Button
+        {/* <Button
           variant="contained"
           color="primary"
           size="medium"
@@ -38,8 +38,8 @@ function PaginaMeniu() {
           href="/paginaprofesori"
         >
           Profesori
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           variant="contained"
           color="primary"
           size="medium"
@@ -47,7 +47,7 @@ function PaginaMeniu() {
           href="/paginamateriiscolare"
         >
           Materii Școlare
-        </Button>
+        </Button> */}
       </Stack>
     </Stack>
   );
