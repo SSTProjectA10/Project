@@ -13,16 +13,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:3000"); // Specifică domeniul tău de origine
+  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:3000"); 
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, PUT, DELETE, OPTIONS"
-  ); // Specifică metodele HTTP permise
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Specifică antetele permise
+  ); 
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   if (req.method === "OPTIONS") {
-    res.sendStatus(200); // Răspunde cu OK pentru cererile preflight (OPTIONS)
+    res.sendStatus(200);
   } else {
-    next(); // Treci la următorul middleware
+    next(); 
   }
 });
 
@@ -93,30 +93,19 @@ app.post("/adaugaElev", (req, res) => {
   res.send("Cererea POST a fost procesată cu succes!");
 });
 
-app.post("/modificaElev", (req, res) => {
-  let elev = [];
-  elev.push(req.body.elev);
-  elev[0].ID = req.body.idCautatModificare;
-
-  try {
-    const rezultat = Elev.deleteOne({ ID: elev.ID });
-  }
-  catch (err) {
-    console.error("Eroare la stergerea inregistrarii modificare elev:", err);
-  }
-
-  elev.forEach(async (elev) => {
-    try {
-      const nouElev = new Elev(elev);
-      const rezultat = await nouElev.save();
-      console.log("Elevul a fost introdus cu succes:", rezultat);
-    } catch (err) {
-      console.error("Eroare la introducerea elevului:", err);
-    }
-  });
-
-  res.send("Cererea POST a fost procesată cu succes!");
+app.put("/modificaElev", async (req, res) => {
+  const filter = {ID:req.body.idCautatModificare};
+  const update = req.body.elev;
+  let doc = await Elev.findOneAndUpdate(filter, update).then(
+    (doc) => {res.send(doc);}
+  );
 });
+
+app.delete("/:idCautat", async(req, res) => {
+  const filter = {ID: req.params.idCautat};
+  await Elev.deleteOne(filter)
+  res.send("Delete succesful")
+})
 
 app.listen(4000, (req, res) => {
   console.log(`Serverul a pornit la PORT: ${PORT}.`);

@@ -23,6 +23,7 @@ import Paper from "@mui/material/Paper";
 import axios from "axios";
 
 function PaginaElevi() {
+  const url = "http://localhost:4000/"
   //PT MODALUL DE ADAUGARE DATE ELEV
   const [openAdaugare, setOpenAdaugare] = useState(false);
   const handleOpenAdaugare = () => setOpenAdaugare(true);
@@ -93,7 +94,6 @@ function PaginaElevi() {
               
             }
           }
-        console.log(copieElevi);
         setElevi(copieElevi);
       })
       .catch((error) => {
@@ -178,7 +178,7 @@ function PaginaElevi() {
       //AICI TREBUIE TRIMISE DATELE CATRE BACKEND
       const urlModificareElev = "http://localhost:4000/modificaElev";
       axios
-        .post(urlModificareElev, pachet)
+        .put(urlModificareElev, pachet)
         .then((response) => {
           console.log("Raspuns de la server: ", response.data);
         })
@@ -220,23 +220,10 @@ function PaginaElevi() {
   };
 
   const verificareIDstergere = (idCautat) => {
-    let raspunsVerificare = true;
-    //TREBUIE FACUTA O CERERE CATRE BAZA DE DATE SA VEDEM DACA EXISTA ID-UL CAUTAT
-    if (idCautat === "10") {
-      setDateStergereComplete(true);
-      raspunsVerificare = true;
-    } else {
-      raspunsVerificare = false;
-      setDateStergereComplete(false);
-    }
-
-    if (raspunsVerificare) {
-      //AICI TREBUIE STEARSA INREGISTRAREA GASITA DIN BAZA DE DATE
-      SetIdCautatStergere(null);
-      handleCloseValidareStergere();
-    } else {
-      console.log("ID ul cautat nu exista.");
-    }
+    axios.delete(`http://localhost:4000/${idCautat}`).then().catch((err)=>{console.log(err)});
+    console.log(`http://localhost:4000/${idCautat}`)
+    SetIdCautatStergere(null);
+    handleCloseValidareStergere();
   };
 
   const resetareStari = () => {
