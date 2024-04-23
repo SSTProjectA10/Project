@@ -12,7 +12,7 @@
 ## Faza doi:
 - [x] Modificăm aplicația să aibă un singur tabel/entitate
 - [x] Legăm o bază de date mongo la aplicație
-- [ ] Populăm baza de date cu elevii
+- [x] Populăm baza de date cu elevii
 - [ ] Teste CRUD pentru aplicație
 
 ## ~~Faza inițială:~~
