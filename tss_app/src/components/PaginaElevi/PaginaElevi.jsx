@@ -79,7 +79,7 @@ function PaginaElevi() {
   const [elevCautat, setElevCautat] = useState(templateElev);
 
   useEffect(() => {
-    const urlObtineElevi = "http://localhost:4000/obtineElevi";
+    const urlObtineElevi = "http://localhost:4000/";
     axios
       .get(urlObtineElevi)
       .then((response) => {
@@ -135,11 +135,10 @@ function PaginaElevi() {
         email: email,
         mediaGenerala: mediaGenerala,
       };
-      const pachet = { elev };
       //AICI TREBUIE TRIMISE DATELE CATRE BACKEND
-      const urlAdaugareElev = "http://localhost:4000/adaugaElev";
+      const urlAdaugareElev = "http://localhost:4000/";
       axios
-        .post(urlAdaugareElev, pachet)
+        .post(urlAdaugareElev, elev)
         .then((response) => {
           console.log("Raspuns de la server: ", response.data);
         })
@@ -154,45 +153,44 @@ function PaginaElevi() {
     }
   };
 
-  const modificareElev = () => {
-    let ok = true;
-    if (
-      nume === "" ||
-      prenume === "" ||
-      dataNasterii === "" ||
-      clasa === "" ||
-      email === "" ||
-      mediaGenerala === 0
-    )
-      ok = false;
-    if (ok) {
-      const elev = {
-        nume: nume,
-        prenume: prenume,
-        dataNasterii: dataNasterii,
-        clasa: clasa,
-        email: email,
-        mediaGenerala: mediaGenerala,
-      };
-      const pachet = { elev, idCautatModificare };
-      //AICI TREBUIE TRIMISE DATELE CATRE BACKEND
-      const urlModificareElev = "http://localhost:4000/modificaElev";
-      axios
-        .put(urlModificareElev, pachet)
-        .then((response) => {
-          console.log("Raspuns de la server: ", response.data);
-        })
-        .catch((error) => {
-          console.log("Eroare în timpul modificarii elevului.", error);
-        });
+const modificareElev = () => {
+  let ok = true;
+  if (
+    nume === "" ||
+    prenume === "" ||
+    dataNasterii === "" ||
+    clasa === "" ||
+    email === "" ||
+    mediaGenerala === 0
+  ) {
+    ok = false;
+  }
 
-      //AICI TREBUIE TRIMISE DATELE CATRE BACKEND
-      handleCloseModificare();
-      setDateModificareComplete(true);
-    } else {
-      setDateModificareComplete(false);
-    }
-  };
+  if (ok) {
+    const elev = {
+      nume: nume,
+      prenume: prenume,
+      dataNasterii: dataNasterii,
+      clasa: clasa,
+      email: email,
+      mediaGenerala: mediaGenerala,
+    };
+    const urlModificareElev = `http://localhost:4000/${idCautatModificare}`;
+    axios
+      .put(urlModificareElev, elev)
+      .then((response) => {
+        console.log("Raspuns de la server: ", response.data);
+        handleCloseModificare();
+        setDateModificareComplete(true);
+      })
+      .catch((error) => {
+        console.log("Eroare în timpul modificarii elevului.", error);
+        setDateModificareComplete(false);
+      });
+  } else {
+    setDateModificareComplete(false);
+  }
+};
 
   const verificareIDcautat = (idCautat) => {
     let raspunsVerificare = false;

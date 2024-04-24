@@ -1,8 +1,7 @@
-const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const { db, Colectie, Elev } = require("./db");
+const { Elev } = require("./db");
 
 
 const PORT = 4000;
@@ -27,85 +26,51 @@ app.use((req, res, next) => {
 });
 
 //REQUESTURI
-app.get("/", (req, res) => {
-  res.send("Aaaa");
-});
+// app.get("/", (req, res) => {
+//   res.send("Aaaa");
+// });
 
 app.get("/resetareBD", (req, res) => {
-  Colectie.drop((err, rezultat) => {
-    if (err) {
-      console.error("Eroare la ștergerea colecției elevi:", err);
-    } else {
-      if (rezultat) {
-        console.log("Colecția a fost ștearsă cu succes:", rezultat);
-      } else {
-        console.log("Colecția nu există în baza de date.");
-      }
-    }
-  });
-
-  // AICI INTRODUC DATELE ALEA DEFAULT
-  const { elevi } = require("./exampleElevs")
-
-  elevi.forEach(async (elev) => {
-    try {
-      const nouElev = new Elev(elev);
-      const rezultat = await nouElev.save();
-      console.log("Elevul a fost introdus cu succes:", rezultat);
-    } catch (err) {
-      console.error("Eroare la introducerea elevului:", err);
-    }
-  });
-
+  Elev.drop();
+  const { elevi } = require("./exampleElevs");
+  Elev.insertMany(elevi);
   ID = 21;
   res.send("Am resetat baza de date.");
 });
 
-app.get("/obtineElevi", (req, res) => {
-
-  async function importData() {
-    try {
-      const documents = await Elev.find({}); 
-      res.send(documents);
-    } catch (error) {
-      console.error("Eroare:", error);
-    }
-  }
-  importData();
+app.get("/", async (req, res) => {
+  const doc = await Elev.find({}).toArray();
+  res.send(doc)
 });
 
-app.post("/adaugaElev", (req, res) => {
-  let elev = [];
-  elev.push(req.body.elev);
-  elev[0].ID = ID;
-  ID = ID+1;
+app.get("/:id", async (req, res) =>{
+  let id = Number(req.params.id);
+  const document = await Elev.findOne({ID:id}); 
+  res.send(document);
+})
 
-  elev.forEach(async (elev) => {
-    try {
-      const nouElev = new Elev(elev);
-      const rezultat = await nouElev.save();
-      console.log("Elevul a fost introdus cu succes:", rezultat);
-    } catch (err) {
-      console.error("Eroare la introducerea elevului:", err);
-    }
-  });
-
-  res.send("Cererea POST a fost procesată cu succes!");
+app.post("/", async (req, res) => {
+  let elev = req.body;
+  elev.ID = ID
+  ID ++;
+  const doc = await Elev.insertOne(elev);
+  res.send(doc);
 });
 
-app.put("/modificaElev", async (req, res) => {
-  const filter = {ID:req.body.idCautatModificare};
-  const update = req.body.elev;
-  let doc = await Elev.findOneAndUpdate(filter, update).then(
-    (doc) => {res.send(doc);}
-  );
+app.put("/:idCautatModificare", async (req, res) => {
+  let id = Number(req.params.idCautatModificare);
+  let filter = {ID:id}
+  let update = {$set: req.body}
+  let doc = await Elev.findOneAndUpdate(filter, update);
+  res.send(doc);
 });
 
 app.delete("/:idCautat", async(req, res) => {
-  const filter = {ID: req.params.idCautat};
-  await Elev.deleteOne(filter)
-  res.send("Delete succesful")
-})
+  let id = Number(req.params.idCautat)
+  const filter = {ID: id};
+  let doc = await Elev.findOneAndDelete(filter)
+  res.send(doc)
+});
 
 app.listen(4000, (req, res) => {
   console.log(`Serverul a pornit la PORT: ${PORT}.`);

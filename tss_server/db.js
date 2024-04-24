@@ -1,31 +1,25 @@
-const mongoose = require("mongoose");
+const { MongoClient } = require("mongodb");
 
 const dbURL = "mongodb+srv://tss:IonutRadu@proiecttss.wsltsj2.mongodb.net/?retryWrites=true&w=majority&appName=ProiectTSS";
 
-mongoose.connect(dbURL);
-const db = mongoose.connection;
-
-db.on("error", console.error.bind(console, "Eroare la conexiunea către MongoDB:"));
-db.once("open", () => {
-  console.log("Conectat cu succes la baza de date.");
+const client = new MongoClient(dbURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-const Schema = mongoose.Schema;
-const elevSchema = new Schema({
-  nume: String,
-  prenume: String,
-  dataNasterii: String,
-  clasa: String,
-  email: String,
-  mediaGenerala: Number,
-  ID: Number,
-}, { versionKey: false, collection: "elevi" });
+async function connectToDatabase() {
+  try {
+    await client.connect();
+    console.log("Connected successfully to MongoDB");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+  }
+}
 
-  //versionKey - iti apare nush ce versiune in care s a facut modificarea
-  //collection - numele colectiei pt care fac schema
+connectToDatabase();
 
-const Colectie = mongoose.connection.collection("elevi");
+const db = client.db(); // Get the default database
 
-const Elev = mongoose.model("Elev", elevSchema);
+const Elev = db.collection("Elev"); // Get the elevi collection
 
-module.exports = { db, Colectie, Elev };
+module.exports = { Elev };
