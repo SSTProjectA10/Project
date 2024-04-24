@@ -13,7 +13,7 @@
 - [x] Modificăm aplicația să aibă un singur tabel/entitate
 - [x] Legăm o bază de date mongo la aplicație
 - [x] Populăm baza de date cu elevii
-- [ ] Teste CRUD pentru aplicație
+- [x] Teste CRUD pentru aplicație
 
 ## ~~Faza inițială:~~
 - ~~Funcții pentru operații de bază (adunare, scădere, înmulțire, împărțire)~~
