@@ -1,0 +1,7 @@
+De facut:
+- prezentare - PowerPoint
+    - prezentare per total, ce avem, interfata, baza de datele, modelul, cum sunt documenetele
+    - videoclipuri cu demo in prezentare de cum ruleaza testele
+    - raport despre folosirea unui tool de AI care ajută în timpul testării software; Il punem sa faca si el teste si comparam ce teste a facut el, cu ce am facut noi, si daca 1 == 1 adevarat, ele vor fi idetince, ca na
+    - referinte (documentatie tooluri folosite, site-uri de unde am invatat, w3school)
+    - pune ghilimele la tot codul si scrie de la ce ai l-ai luat (haha)

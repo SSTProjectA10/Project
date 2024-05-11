@@ -23,3 +23,5 @@ const db = client.db(); // Get the default database
 const Elev = db.collection("Elev"); // Get the elevi collection
 
 module.exports = { Elev };
+
+// TODO: Asta e tot de la mongo connect documentatie
