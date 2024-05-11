@@ -57,10 +57,10 @@ app.get("/:id", async (req, res) =>{
 app.post("/", async (req, res) => {
   let elev = req.body;
   elev.ID = ID
-  ID ++;  
-  if (!elev.nume || !elev.prenume || !elev.dataNasterii || !elev.clasa || !elev.email || !elev.mediaGenerala || !elev.ID)
+  ID ++;
+  if (!elev.nume || !elev.prenume || !elev.dataNasterii || !elev.clasa || !elev.email || !elev.mediaGenerala || !elev.ID)    
     return res.status(400).json("Empty field");
-  if (typeof(elev.ID) != "number" || typeof(elev.mediaGenerala) != "number")
+  if (typeof(elev.ID) != "number" )
     return res.status(400).json("Wrong input for number fields");
   const doc = await Elev.insertOne(elev);
   res.send(doc);
@@ -73,7 +73,7 @@ app.put("/:idCautatModificare", async (req, res) => {
   let doc = await Elev.findOneAndUpdate(filter, update);
   if (doc === null)
     return res.status(400).json("Not found");
-  if (typeof(doc.ID) != "number" || typeof(doc.mediaGenerala) != "number")
+  if (typeof(doc.ID) != "number")
     return res.status(400).json("Wrong input for number fields");
   res.send(doc);
 });

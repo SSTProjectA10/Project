@@ -120,8 +120,8 @@ describe('Suita manuala', () => {
           dataNasterii: '2004-04-12',
           clasa: '12A',
           email: 'marcel_marcescu@yahoo.rom',
-          mediaGenerala: "sss",
-          ID: 21
+          mediaGenerala: 5,
+          ID: "sss"
         };
         Elev.insertOne.mockResolvedValue(elevData);
         const response = await axios.post(`${path}`, elevData).catch((err) =>{
@@ -158,8 +158,8 @@ describe('Suita manuala', () => {
           dataNasterii: "2004-04-12",
           clasa: "11B",
           email: "updated.email@example.com",
-          mediaGenerala: 'invalid_mediaGenerala',
-          ID: id
+          mediaGenerala: 5,
+          ID: "id"
         };
         Elev.findOneAndUpdate.mockResolvedValue(updatedDocument);
         const response = await axios.put(`${path}${id}`, updatedDocument).catch((err) =>{
