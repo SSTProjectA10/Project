@@ -1,4 +1,4 @@
-# Proiect - Managament cursuri
+# Proiect - Managament elevi
 ## Descriere
 - Aceasta este o aplicație web în JavaScript care curpinde o aplicație front-end în React și un server NodeJS cu Express conectează la o bază de date Mongo.
 - Scopul aplicației este înregistrarea de elevi.
